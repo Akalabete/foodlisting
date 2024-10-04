@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const RecipeModel = require('./path/to/your/recipeModel'); // Assurez-vous de remplacer par le bon chemin
-
+const RecipeModel = require('../models/ingredients'); 
+const IngredientModel = require('../models/ingredients');
 const sequelize = new Sequelize('FoodListing', 'root', '', {
   host: 'localhost',
   dialect: 'mariadb',
@@ -11,7 +11,7 @@ const sequelize = new Sequelize('FoodListing', 'root', '', {
 });
 
 const Recipe = RecipeModel(sequelize, DataTypes);
-
+const Ingredient = IngredientModel(sequelize, DataTypes);
 const authenticateDB = async () => {
   try {
     await sequelize.authenticate();
@@ -31,7 +31,8 @@ const syncDB = async () => {
 };
 
 module.exports = {
-  Recipe,
-  authenticateDB,
-  syncDB
+    Ingredient,
+    Recipe,
+    authenticateDB,
+    syncDB
 };

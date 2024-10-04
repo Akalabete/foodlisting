@@ -20,6 +20,14 @@ module.exports = (sequelize, DataTypes) => {
     ingType: {
       type: DataTypes.ENUM('légumess', 'fruits', 'oeufs', 'lait d/origine animale', 'poisson', 'viande'),
       allowNull: false
-    }
+    },
+    recipeId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Recipes',
+          key: 'recipeId'
+        }
+      }
   });
 }
