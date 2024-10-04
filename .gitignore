@@ -3,3 +3,4 @@ node_modules/
 .env
 frontend/foodlisting/package-lock.json
 MVCSCRUDs/scruds.xlsx
+MVCSCRUDs/~$scruds.xlsx
