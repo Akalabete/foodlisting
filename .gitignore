@@ -1,0 +1,4 @@
+package-lock.json
+node_modules/
+.env
+frontend/foodlisting/package-lock.json
