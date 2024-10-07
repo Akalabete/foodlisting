@@ -36,7 +36,8 @@ router.post('/recipes', async (req, res) => {
     });
 
     await newRecipe.save();
-    res.status(201).json(newRecipe);
+    const message = 'Merci pour votre contribution, la recette ${recipeName} a bien été ajoutée';
+    res.json({ message, data: newRecipe })
   } catch (err) {
     console.error('Error saving recipe:', err);
     res.status(500).json({ message: 'Server error' });
