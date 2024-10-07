@@ -20,3 +20,5 @@ router.get('/recipes/:id', async (req, res) => {
     mongoose.connection.close();
   }
 });
+
+module.exports = router;

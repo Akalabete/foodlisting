@@ -2,15 +2,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const connectDB = require('./db/mongoose');
 const findAllRecipes = require('./src/routes/findAllRecipes');
-
+const addNewRecipe = require('./src/routes/addNewRecipe');
+const findRecipeByPk = require('./src/routes/findRecipeByPk');
 const app = express();
 
 app.use(bodyParser.json());
 
 connectDB();
 
-// Utiliser la route findAllRecipes
 app.use('/api', findAllRecipes);
+app.use('/api', addNewRecipe);
+app.use('/api', findRecipeByPk);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
