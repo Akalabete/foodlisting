@@ -42,9 +42,7 @@ router.post('/recipes', async (req, res) => {
   } catch (err) {
     console.error('Error saving recipe:', err);
     res.status(500).json({ message: 'Server error' });
-  } finally {
-    mongoose.connection.close();
-  }
+  } 
 });
 
 module.exports = router;
