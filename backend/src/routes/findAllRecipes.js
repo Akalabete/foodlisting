@@ -1,15 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const connectDB = require('../../db/mongoose');
 const Recipe = require('../../models/recipe');
 const Ingredient = require('../../models/ingredient');
 
 const router = express.Router();
 
-// Connect to MongoDB
-connectDB();
 
-// Route pour récupérer toutes les recettes
 router.get('/recipes', async (req, res) => {
   try {
     const recipes = await Recipe.find().populate('ingredients.ingredient');

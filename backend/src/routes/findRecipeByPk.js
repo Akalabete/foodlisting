@@ -1,10 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const connectDB = require('../../db/mongoose');
 const Recipe = require('../../models/recipe');
 const Ingredient = require('../../models/ingredient');
 
-connectDB();
 
 
 const router = express.Router();
