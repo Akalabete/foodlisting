@@ -5,6 +5,7 @@ const findAllRecipes = require('./src/routes/findAllRecipes');
 const addNewRecipe = require('./src/routes/addNewRecipe');
 const findRecipeByPk = require('./src/routes/findRecipeByPk');
 const deleteRecipe = require('./src/routes/deleteRecipe');
+const updateRecipe = require('./src/routes/updateRecipe');
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.use('/api', findAllRecipes);
 app.use('/api', addNewRecipe);
 app.use('/api', findRecipeByPk);
 app.use('/api', deleteRecipe);
-
+app.use('/api', updateRecipe);
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
