@@ -3,11 +3,14 @@
     "version": "1.0.0",
     "description": "Fullstack project with backend and frontend",
     "scripts": {
-      "start": "npx concurrently \"npm run start:backend\" \"npm run dev:frontend\"",
-      "start:backend": "cd backend && npm start",
-      "dev:frontend": "cd frontend/foodlisting && npm run dev"
+        "start": "npx concurrently \"npm run start:backend\" \"npm run dev:frontend\"",
+        "start:backend": "cd backend && npm start",
+        "dev:frontend": "cd frontend/foodlisting && npm run dev"
     },
     "devDependencies": {
-      "concurrently": "^6.0.0"
+        "concurrently": "^6.0.0"
+    },
+    "dependencies": {
+        "mongoose": "^8.7.0"
     }
-  }
+}
