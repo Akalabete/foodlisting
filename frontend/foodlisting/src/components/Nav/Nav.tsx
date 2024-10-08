@@ -6,13 +6,13 @@ export default function Nav() {
     return (
 
           <nav className={styles.nav}>
-            <Link href="api/recipes">
+            <Link href="/recipes">
                 Item 1
             </Link>
-            <Link href="api/recipes">
+            <Link href="/recipes">
                 Item 2
             </Link>
-            <Link href="api/recipes">
+            <Link href="/recipes">
                 Item 3
             </Link>
         </nav>

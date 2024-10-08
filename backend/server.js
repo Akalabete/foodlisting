@@ -13,14 +13,12 @@ app.use(bodyParser.json());
 
 connectDB();
 
-app.use('/api', findAllRecipes);
-app.use('/api', addNewRecipe);
-app.use('/api', findRecipeByPk);
-app.use('/api', deleteRecipe);
-app.use('/api', updateRecipe);
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.use('/', findAllRecipes);
+app.use('/', addNewRecipe);
+app.use('/', findRecipeByPk);
+app.use('/', deleteRecipe);
+app.use('/', updateRecipe);
+
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
