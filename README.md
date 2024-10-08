@@ -11,3 +11,4 @@ V. 0.0.1
 
 // recipe list //
 
+Feature added october 8th, fetch data from the api and return a list of recipe
