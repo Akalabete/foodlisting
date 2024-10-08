@@ -1,0 +1,31 @@
+.headerLayout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color:teal;
+    max-height: 10vh;
+    .logoWrapper {
+        height: 10vh;
+        border-radius: 30px;
+        overflow: hidden;
+        .img {
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .titleWrapper {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        h1{
+            margin: 0;
+            color: white;
+        }
+        h2 {
+            margin: 0;
+            color: white;
+        }
+    }
+} 

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
-
+import "./page.module.scss";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
+import Menu from "../components/Menu/Menu";
 
 
 export const metadata: Metadata = {
@@ -14,11 +16,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={` antialiased`}
-      >
+    <html lang="fr">
+      <body>
+      <Header title="Welcome to Food Listing" subtitle="Your weekly menu planner" />
+        <Menu />
         {children}
+        <Footer />
       </body>
     </html>
   );
