@@ -3,15 +3,17 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import RecipeCard from '../../components/RecipeCards/RecipeCard';
 import { RootState, AppDispatch } from '../../store/store';
-import { setRecipes, setError } from '../../store/slices/recipesSlice';
+import { setRecipes, setSelectedRecipe, setError } from '../../store/slices/recipesSlice';
 import { Recipe } from '../../models/recipe';
 import styles from './page.module.scss';
-
+import { useRouter } from 'next/navigation';
 
 const RecipesPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const recipes = useSelector((state: RootState) => state.recipes.recipes);
   const error = useSelector((state: RootState) => state.recipes.error);
+  const router = useRouter();
+  console.log(recipes);
 
   useEffect(() => {
     async function fetchRecipes() {
@@ -33,7 +35,16 @@ const RecipesPage: React.FC = () => {
 
     fetchRecipes();
   }, [dispatch]);
-
+  
+  const handleSelectRecipe = (id: string) => {
+    const selectedRecipe = recipes.find(recipe => recipe._id === id);
+    if (selectedRecipe) {
+      console.log(`Selected Recipe ID: ${selectedRecipe._id}`); // Vérifiez que l'ID est bien reçu
+      dispatch(setSelectedRecipe(selectedRecipe));
+      router.push(`/recipes/${selectedRecipe._id}`);
+    }
+  };
+  
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -53,15 +64,19 @@ const RecipesPage: React.FC = () => {
         </div>
       </div>
       <div className={styles.recipesWrapper}>
-        {recipes.map((recipe) => (
+        {recipes.map((recipe) => {
+          console.log(`Creating RecipeCard with ID: ${recipe._id}`); // Vérifiez que l'ID est bien passé
+          return (
             <RecipeCard
-                key={recipe.id}
-                recipeName={recipe.recipeName}
-                numberOfSpoon={recipe.numberOfSpoon}
-                bakingTime={recipe.bakingTime}
-                id={recipe.id}
+              key={recipe._id}
+              recipeName={recipe.recipeName}
+              numberOfSpoon={recipe.numberOfSpoon}
+              bakingTime={recipe.bakingTime}
+              id={recipe._id}
+              onClick={handleSelectRecipe}
             />
-        ))}
+          );
+        })}
       </div>
     </div>
   );

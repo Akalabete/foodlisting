@@ -1,6 +1,5 @@
-// src/store/recipesSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Recipe } from '../../models/recipe';
+import { Recipe } from '../../models/recipe.d';
 
 interface RecipesState {
   recipes: Recipe[];
