@@ -2,19 +2,29 @@
 .body {
     margin: none;
     padding: none;
+    height: 100%;
 }
 
 .appLayout {
     display: flex;
     flex-direction: row;;
-   
     width: 100vw;
+    height: 75vh;
     background-color: #f5f5f5;
     margin-top: 1vh;
     .menuWindow {
         flex: 0 0 15%; 
         flex-direction: column;
         background-color: #ccc; 
+        height: 100%;
+        margin-right: 0;
+    }
+    .mainContent{
+        flex: 1;
+        height: 100%;
+        
+        padding-left: 0;
+        margin-left: 0;
     }
 
 }

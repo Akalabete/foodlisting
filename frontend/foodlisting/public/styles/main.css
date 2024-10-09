@@ -1,17 +1,79 @@
-/* Error: Can't find stylesheet to import.
- *   ,
- * 1 | @import './mixins.module.scss';
- *   |         ^^^^^^^^^^^^^^^^^^^^^^
- *   '
- *   src\styles\main.scss 1:9  root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import './mixins.module.scss';\d\a   \2502          ^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   src\\styles\\main.scss 1:9  root stylesheet";
+.mainWindow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f5f5f5;
 }
+.mainWindow h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.mainWindow .recipeWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.headerLayout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: teal;
+  max-height: 10vh;
+}
+.headerLayout .logoWrapper {
+  height: 10vh;
+  border-radius: 30px;
+  overflow: hidden;
+}
+.headerLayout .logoWrapper .img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+.headerLayout .titleWrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.headerLayout .titleWrapper h1 {
+  margin: 0;
+  color: white;
+}
+.headerLayout .titleWrapper h2 {
+  margin: 0;
+  color: white;
+}
+
+.body {
+  margin: none;
+  padding: none;
+  height: 100%;
+}
+
+.appLayout {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f5f5f5;
+  margin-top: 1vh;
+}
+.appLayout .menuWindow {
+  flex: 0 0 15%;
+  flex-direction: column;
+  background-color: #ccc;
+  height: 100%;
+}
+.appLayout .mainContent {
+  flex: 1;
+}
+
+/*# sourceMappingURL=main.css.map */

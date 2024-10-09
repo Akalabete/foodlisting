@@ -23,8 +23,9 @@ export default function RootLayout({
           <div className={styles.menuWindow}>
             <Menu />
           </div>
+          <div className={styles.mainContent}>
             {children}
-          
+          </div>
         </div>
         <Footer />
       </body>
