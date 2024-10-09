@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import RecipeCard from '../../components/RecipeCards/RecipeCard';
 import { RootState, AppDispatch } from '../../store/store';
-import { setRecipes, setError } from '../../store/recipesSlice';
+import { setRecipes, setError } from '../../store/slices/recipesSlice';
 import { Recipe } from '../../models/recipe';
 import styles from './page.module.scss';
 
