@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Providers } from '../store/providers';
 import "./page.module.scss";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
@@ -18,16 +19,18 @@ export default function RootLayout({
   return (
     <html className={styles.body} lang="fr">
       <body className={styles.body}>
-      <Header title="Welcome to Food Listing" subtitle="Your weekly menu planner" />
-        <div className={styles.appLayout}>
-          <div className={styles.menuWindow}>
-            <Menu />
+      <Providers>
+        <Header title="Welcome to Food Listing" subtitle="Your weekly menu planner" />
+          <div className={styles.appLayout}>
+            <div className={styles.menuWindow}>
+              <Menu />
+            </div>
+            <div className={styles.mainContent}>
+              {children}
+            </div>
           </div>
-          <div className={styles.mainContent}>
-            {children}
-          </div>
-        </div>
         <Footer />
+      </Providers>
       </body>
     </html>
   );
