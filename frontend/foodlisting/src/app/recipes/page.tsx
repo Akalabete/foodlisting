@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import RecipeCard from '../../components/RecipeCards/RecipeCard';
 import { Recipe } from '../api/getAllRecipe';
+import styles from './page.module.scss';
+
 
 const RecipesPage: React.FC = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -33,9 +35,20 @@ const RecipesPage: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className={styles.mainWindow}>
       <h1>Liste des Recettes</h1>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div className={styles.searchWrapper}>
+        <label htmlFor="search-recipe">Rechercher une recette</label>
+        <div className={styles.searchBar}>
+          <input 
+            type="search"
+            id="search-recipe" 
+            placeholder="Ce qui vous tente"
+          />
+          <button>Rechercher</button>
+        </div>
+      </div>
+      <div className={styles.recipesWrapper}>
         {recipes.map((recipe) => (
             <RecipeCard
                 key={recipe.id}

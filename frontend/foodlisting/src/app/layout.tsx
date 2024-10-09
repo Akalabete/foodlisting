@@ -3,7 +3,7 @@ import "./page.module.scss";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Menu from "../components/Menu/Menu";
-
+import styles from "./page.module.scss";
 
 export const metadata: Metadata = {
   title: "Food Listing",
@@ -16,11 +16,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
-      <body>
+    <html className={styles.body} lang="fr">
+      <body className={styles.body}>
       <Header title="Welcome to Food Listing" subtitle="Your weekly menu planner" />
-        <Menu />
-        {children}
+        <div className={styles.appLayout}>
+          <div className={styles.menuWindow}>
+            <Menu />
+          </div>
+            {children}
+          
+        </div>
         <Footer />
       </body>
     </html>

@@ -1,0 +1,16 @@
+@mixin box-shadow($offset-x, $offset-y, $blur-radius, $spread-radius, $color) {
+    box-shadow: #{$offset-x}px #{$offset-y}px #{$blur-radius}px #{$spread-radius}px #{$color};
+  }
+@mixin box-shadow-grey {
+    @include box-shadow(5, 5, 20, 2, grey);
+}
+
+@mixin flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin flex-row {
+    display: flex;
+    flex-direction: row;
+}

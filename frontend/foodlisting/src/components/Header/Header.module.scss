@@ -1,3 +1,6 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
 .headerLayout {
     display: flex;
     justify-content: space-between;
@@ -16,8 +19,7 @@
         }
     }
     .titleWrapper {
-        display: flex;
-        flex-direction: column;
+        @include flex-col;
         text-align: center;
         h1{
             margin: 0;
