@@ -1,29 +1,6 @@
 // src/store/recipesSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface Recipe {
-  id: string;
-  recipeName: string;
-  isVegan: boolean;
-  isVegetarian: boolean;
-  numberOfSpoon: number;
-  instructionPoints: string[];
-  difficultyRate: number;
-  yummyRating: number;
-  bakingTime: number;
-  createdBy: string;
-  ingredients: {
-    ingredient: {
-      id: string;
-      name: string;
-      unityType: string;
-      ingType: string;
-    };
-    qty: number;
-  }[];
-  createdAt: string;
-  updatedAt: string;
-}
+import { Recipe } from '../models/recipe.d';
 
 interface RecipesState {
   recipes: Recipe[];

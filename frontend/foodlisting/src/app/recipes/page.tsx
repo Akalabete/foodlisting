@@ -1,37 +1,41 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import RecipeCard from '../../components/RecipeCards/RecipeCard';
-import { Recipe } from '../api/getAllRecipe';
+import { RootState, AppDispatch } from '../../store/store';
+import { setRecipes, setError } from '../../store/recipesSlice';
+import { Recipe } from '../../models/recipe';
 import styles from './page.module.scss';
 
 
 const RecipesPage: React.FC = () => {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const dispatch = useDispatch<AppDispatch>();
+  const recipes = useSelector((state: RootState) => state.recipes.recipes);
+  const error = useSelector((state: RootState) => state.recipes.error);
 
   useEffect(() => {
     async function fetchRecipes() {
       try {
-        const res = await fetch('api/recipes');
+        const res = await fetch('/api/recipes');
         if (!res.ok) {
           throw new Error('Failed to fetch recipes');
         }
-        const data = await res.json();
-        setRecipes(data);
+        const data: Recipe[] = await res.json();
+        dispatch(setRecipes(data));
       } catch (err) {
         if (err instanceof Error) {
-          setError(err.message);
+          dispatch(setError(err.message));
         } else {
-          setError('An unknown error occurred');
+          dispatch(setError('An unknown error occurred'));
         }
       }
     }
 
     fetchRecipes();
-  }, []);
+  }, [dispatch]);
 
   if (error) {
-    return <div>Errorxxx: {error}</div>;
+    return <div>Error: {error}</div>;
   }
 
   return (
@@ -52,7 +56,7 @@ const RecipesPage: React.FC = () => {
         {recipes.map((recipe) => (
             <RecipeCard
                 key={recipe.id}
-                title={recipe.recipeName}
+                recipeName={recipe.recipeName}
                 numberOfSpoon={recipe.numberOfSpoon}
                 bakingTime={recipe.bakingTime}
                 id={recipe.id}
