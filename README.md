@@ -11,5 +11,5 @@ V. 0.0.1
 
 // recipe list //
 
-Feature added october 8th, fetch data from the api and return a list of recipe
-Feature added october 10th, when clicking on a recipe card, it expand in a view with details of it.
+* Feature added october 8th, fetch data from the api and return a list of recipe
+* Feature added october 10th, when clicking on a recipe card, it expand in a view with details of it.
