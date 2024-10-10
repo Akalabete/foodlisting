@@ -1,37 +1,51 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import RecipeCard from '../../components/RecipeCards/RecipeCard';
-import { Recipe } from '../api/getAllRecipe';
+import { RootState, AppDispatch } from '../../store/store';
+import { setRecipes, setSelectedRecipe, setError } from '../../store/slices/recipesSlice';
+import { Recipe } from '../../models/recipe';
 import styles from './page.module.scss';
-
+import { useRouter } from 'next/navigation';
 
 const RecipesPage: React.FC = () => {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const dispatch = useDispatch<AppDispatch>();
+  const recipes = useSelector((state: RootState) => state.recipes.recipes);
+  const error = useSelector((state: RootState) => state.recipes.error);
+  const router = useRouter();
+  console.log(recipes);
 
   useEffect(() => {
     async function fetchRecipes() {
       try {
-        const res = await fetch('api/recipes');
+        const res = await fetch('/api/recipes');
         if (!res.ok) {
           throw new Error('Failed to fetch recipes');
         }
-        const data = await res.json();
-        setRecipes(data);
+        const data: Recipe[] = await res.json();
+        dispatch(setRecipes(data));
       } catch (err) {
         if (err instanceof Error) {
-          setError(err.message);
+          dispatch(setError(err.message));
         } else {
-          setError('An unknown error occurred');
+          dispatch(setError('An unknown error occurred'));
         }
       }
     }
 
     fetchRecipes();
-  }, []);
-
+  }, [dispatch]);
+  
+  const handleSelectRecipe = (id: string) => {
+    const selectedRecipe = recipes.find(recipe => recipe._id === id);
+    if (selectedRecipe) {
+      dispatch(setSelectedRecipe(selectedRecipe));
+      router.push(`/recipe`);
+    }
+  };
+  
   if (error) {
-    return <div>Errorxxx: {error}</div>;
+    return <div>Error: {error}</div>;
   }
 
   return (
@@ -49,15 +63,19 @@ const RecipesPage: React.FC = () => {
         </div>
       </div>
       <div className={styles.recipesWrapper}>
-        {recipes.map((recipe) => (
+        {recipes.map((recipe) => {
+          console.log(`Creating RecipeCard with ID: ${recipe._id}`); // Vérifiez que l'ID est bien passé
+          return (
             <RecipeCard
-                key={recipe.id}
-                title={recipe.recipeName}
-                numberOfSpoon={recipe.numberOfSpoon}
-                bakingTime={recipe.bakingTime}
-                id={recipe.id}
+              key={recipe._id}
+              recipeName={recipe.recipeName}
+              numberOfSpoon={recipe.numberOfSpoon}
+              bakingTime={recipe.bakingTime}
+              id={recipe._id}
+              onClick={handleSelectRecipe}
             />
-        ))}
+          );
+        })}
       </div>
     </div>
   );

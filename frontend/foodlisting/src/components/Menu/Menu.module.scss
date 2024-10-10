@@ -1,0 +1,21 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.menuWrapper {
+    @include flex-col;
+    text-align: center;
+    h1 { 
+        font-size: 2rem;
+        font-style: italic;
+    }
+    button {
+        width: 95%;
+        margin: 1rem auto;
+        padding: 0.5rem;
+        border-radius: 15px;
+        background-color: teal;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+}

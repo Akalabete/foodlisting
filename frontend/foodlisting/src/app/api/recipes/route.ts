@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { getAllRecipes } from '../getAllRecipe';
+import { getAllRecipes } from '../getAllRecipes';
 
-export const dynamic = 'force-dynamic'; // defaults to auto
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
