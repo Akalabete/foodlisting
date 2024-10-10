@@ -155,4 +155,47 @@
   cursor: pointer;
 }
 
+.recipeWrapper {
+  display: flex;
+  flex-direction: column;
+}
+.recipeWrapper h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: green;
+  font-style: italic;
+}
+.recipeWrapper__information {
+  width: 70%;
+  margin: 1vh auto;
+  border: solid 3px black;
+  padding: 0 1vw;
+  border-radius: 45px;
+  background-color: blanchedalmond;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.recipeWrapper__lists {
+  width: 90%;
+  margin: 1vh auto;
+  display: flex;
+  flex-direction: row;
+}
+.recipeWrapper__lists > * {
+  width: 50%;
+}
+.recipeWrapper__lists > * h2 {
+  text-align: center;
+  color: green;
+  font-style: italic;
+}
+.recipeWrapper__lists__ingredients ul {
+  list-style-type: circle;
+  padding-left: 20px;
+}
+.recipeWrapper__lists__ingredients ul li {
+  margin: 5px 0;
+}
+
 /*# sourceMappingURL=main.css.map */

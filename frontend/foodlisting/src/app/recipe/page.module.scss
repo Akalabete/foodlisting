@@ -1,0 +1,104 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.recipeWrapper {
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: green;
+        font-style: italic;
+    }
+    @include flex-col;
+    &__information {
+        width: 70%;
+        margin: 1vh auto;
+        border: solid 3px black;
+        padding: 0 1vw;
+        border-radius: 45px;
+        background-color: blanchedalmond;
+        @include flex-row;
+        justify-content: space-evenly;
+    }
+    &__lists {
+        width: 90%;
+        margin: 1vh auto;
+        @include flex-row;
+        justify-content: space-evenly;
+        > * {
+            width: 45%;
+            border: solid 2px black;
+            border-radius: 45px;
+            max-height: 50vh;
+            padding-bottom: 1vh;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            scrollbar-width: none;
+            h2 {
+                text-align: center;
+                color: green;
+                font-style: italic;
+            }
+        }
+        > *.listContainer {
+            overflow-y: auto;
+            padding: 0 1vw;
+            &::-webkit-scrollbar {
+                width: 8px; /* Largeur de la barre de défilement */
+            }
+        
+            &::-webkit-scrollbar-track {
+                background: #f1f1f1; /* Couleur de la piste de défilement */
+                border-radius: 10px; /* Arrondir les coins de la piste */
+            }
+        
+            &::-webkit-scrollbar-thumb {
+                background: #888; /* Couleur de la poignée de défilement */
+                border-radius: 10px; /* Arrondir les coins de la poignée */
+            }
+        
+            &::-webkit-scrollbar-thumb:hover {
+                background: #555; /* Couleur de la poignée de défilement au survol */
+            }
+        }
+        > *h2 {
+            margin: 0.5vh auto;
+        }
+        &__ingredients {
+            
+            ul {
+                margin-top: 0.5vh;
+                list-style-type: circle;
+                padding-left: 30px;
+                li, p{
+                    margin: 3px 0;
+                    padding-left: 10px;
+                }
+                li {
+                    text-decoration: underline dashed;
+                    text-underline-offset: 4px;
+                    color: teal;
+                }    
+            }
+            
+            .listContainer {
+                @include listContainer;
+            }
+        }
+        &__instructions {
+            ol {
+                list-style-type: decimal;
+                li {
+                    color: black;
+                    margin: 1vh 0;
+                }
+                li::marker {
+                    color: teal;
+                }
+            }
+            .listContainer {
+                @include listContainer;
+            }
+        }
+    }
+}

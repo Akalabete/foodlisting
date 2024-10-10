@@ -14,3 +14,29 @@
     display: flex;
     flex-direction: row;
 }
+
+@mixin listContainer {
+
+    margin-right: 2vw;
+    height: 80%;
+    overflow-y: auto;
+    padding: 0 1vw;
+    &::-webkit-scrollbar {
+        width: 8px; /* Largeur de la barre de défilement */
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1; /* Couleur de la piste de défilement */
+        border-radius: 10px; /* Arrondir les coins de la piste */
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #888; /* Couleur de la poignée de défilement */
+        border-radius: 10px; /* Arrondir les coins de la poignée */
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555; /* Couleur de la poignée de défilement au survol */
+    }
+    
+}

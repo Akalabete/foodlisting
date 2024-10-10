@@ -2,6 +2,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import styles from './page.module.scss';
+
 
 const formatTime = (minutes: number): string => {
   const hours = Math.floor(minutes / 60);
@@ -32,20 +34,45 @@ const RecipePage: React.FC = () => {
   }
   
   return (
-    <div>
+    <div className={styles.recipeWrapper}>
       <h1>{selectedRecipe.recipeName}</h1>
-      <p>Recette pour: {spoonIcons}</p>
-      <p>Niveau de régal: {starIcons}</p>
-      <p>Temp de préparation: {formatTime(selectedRecipe.bakingTime)}</p>
-      <p>Niveau de difficulté: {potIcons}</p>
-      {selectedRecipe.ingredients.map((ingredient, index) => (
-        <div key={index}>
-          <ul>
-            <li>{ingredient.ingredient.name}</li>
-            <p>Quantité: {ingredient.qty} {ingredient.ingredient.unityType}</p>
-          </ul>          
+      <div className={styles.recipeWrapper__information}>
+        <div>
+          <p>Recette pour: {spoonIcons}</p>
+          <p>Niveau de régal: {starIcons}</p>
         </div>
-      ))}
+        <div>
+          <p>Temp de préparation: {formatTime(selectedRecipe.bakingTime)}</p>
+          <p>Niveau de difficulté: {potIcons}</p>
+        </div>
+      </div>
+      <div className={styles.recipeWrapper__lists}>
+        <div className={styles.recipeWrapper__lists__ingredients}>
+          <h2>Liste des ingrédients:</h2>
+          <div className={styles.listContainer}>
+            {selectedRecipe.ingredients.map((ingredient, index) => (
+              <div key={index}>
+                <ul>
+                  <li>{ingredient.ingredient.name}</li>
+                  <p>Quantité: {ingredient.qty} {ingredient.ingredient.unityType}</p>
+                </ul>          
+              </div>
+            ))}
+          </div>
+          
+        </div>
+
+        <div className={styles.recipeWrapper__lists__instructions}>
+          <h2>Instructions:</h2>
+          <div className={styles.listContainer}>
+            <ol>
+              {selectedRecipe.instructionPoints.map((instruction, index) => (
+                <li key={index}>{instruction}</li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
