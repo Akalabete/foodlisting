@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from './RecipeCard.module.scss';
-import { RecipeCardProps } from './RecipeCard.d';
+import { RecipeCardProps } from '../../models/RecipeCard';
 
 const RecipeCard: React.FC<RecipeCardProps> = ({ recipeName, numberOfSpoon, bakingTime, onClick, id }) => {
   const handleClick = () => {
-    console.log(`RecipeCard ID: ${id}`);
     onClick(id);
   };
 

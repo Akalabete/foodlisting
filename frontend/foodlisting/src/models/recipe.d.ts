@@ -1,3 +1,5 @@
+import { Ingredient } from './ingredient.d';
+
 export interface Recipe {
     _id: string;
     recipeName: string;
@@ -10,14 +12,10 @@ export interface Recipe {
     bakingTime: number;
     createdBy: string;
     ingredients: {
-      ingredient: {
-        id: string;
-        name: string;
-        unityType: string;
-        ingType: string;
-      };
+      ingredient: Ingredient;
       qty: number;
     }[];
     createdAt: string;
     updatedAt: string;
   }
+  

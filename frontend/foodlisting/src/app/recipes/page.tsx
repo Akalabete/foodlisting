@@ -39,9 +39,8 @@ const RecipesPage: React.FC = () => {
   const handleSelectRecipe = (id: string) => {
     const selectedRecipe = recipes.find(recipe => recipe._id === id);
     if (selectedRecipe) {
-      console.log(`Selected Recipe ID: ${selectedRecipe._id}`); // Vérifiez que l'ID est bien reçu
       dispatch(setSelectedRecipe(selectedRecipe));
-      router.push(`/recipes/${selectedRecipe._id}`);
+      router.push(`/recipe`);
     }
   };
   
