@@ -40,7 +40,7 @@ export default function AddNewRecipePage() {
             <div>
                 <ul>
                     {ingredients.map((ingredient, index) => (
-                        <li key={index}>{ingredient.name} - {ingredient.quantity}</li>
+                        <li key={index}>{ingredient.name} {ingredient.ingType} {ingredient.unityType}</li>
                     ))}
                 </ul>
             </div>
