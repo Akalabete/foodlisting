@@ -1,0 +1,77 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.newRecipeContainer {
+    @include flex-col;
+    
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    h1, h2 {
+        text-align: center;
+    }
+    h2 {
+        font-size: 1.5rem;
+    }
+    > * {
+        margin: auto;
+    }
+    &__informations {
+        width: 90%;
+        border: solid 1px black;
+        @include flex-row;
+        justify-content: space-around;
+        label {
+            font-style: italic;
+            color: teal;
+            text-decoration: underline;
+        }
+        &__shorts {
+            width: 35%;
+            @include flex-col;
+            input, select {
+                border: none;
+                background-color: blanchedalmond;
+            }
+            .short {
+                width: 20%;
+            }
+            &__item {
+                margin: 0.4rem;
+                @include flex-row;
+                justify-content: space-between;
+            }
+        }
+        &__long {
+            @include flex-col;
+            width: 30%;
+            text-align: center;
+            textarea {
+                height: 80px;
+                border: none;
+                background-color: blanchedalmond;
+            }
+        }
+    }
+    &__ingredients {
+        width: 90%;
+        margin-top: 1rem;
+        border:solid 1px black;
+        @include flex-row;
+        justify-content: space-around;
+        &__pickers {
+            width: 40%;
+            @include flex-col;
+            
+            &__item {
+                margin: 0.4rem;
+                @include flex-row;
+                justify-content: space-between;
+                .short {
+                    width: 20%;
+                }
+            }
+        }
+    }
+}
