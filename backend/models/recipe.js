@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const recipeSchema = new Schema({
   recipeName: { type: String, required: true },
+  recipeDescription: { type: String, required: true },
   isVegan: { type: Boolean, default: false },
   isVegetarian: { type: Boolean, default: false },
   numberOfSpoon: { type: Number, required: true },

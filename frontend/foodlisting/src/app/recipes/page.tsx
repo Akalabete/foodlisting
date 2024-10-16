@@ -69,6 +69,7 @@ const RecipesPage: React.FC = () => {
             <RecipeCard
               key={recipe._id}
               recipeName={recipe.recipeName}
+              recipeDescription={recipe.recipeDescription}
               numberOfSpoon={recipe.numberOfSpoon}
               bakingTime={recipe.bakingTime}
               id={recipe._id}

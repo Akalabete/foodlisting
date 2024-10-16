@@ -35,6 +35,7 @@ const createRecipeWithIngredients = async () => {
 
     const newRecipe = new Recipe({
       recipeName: 'Salade de fruits',
+      recipeDescription: 'Une salade de fruit frais maison',
       isVegan: true,
       isVegetarian: true,
       numberOfSpoon: 4,

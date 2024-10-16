@@ -46,6 +46,7 @@ const RecipePage: React.FC = () => {
           <p>Niveau de difficulté: {potIcons}</p>
         </div>
       </div>
+      <p>{selectedRecipe.recipeDescription}</p>
       <div className={styles.recipeWrapper__lists}>
         <div className={styles.recipeWrapper__lists__ingredients}>
           <h2>Liste des ingrédients:</h2>
