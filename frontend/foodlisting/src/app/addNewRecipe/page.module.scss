@@ -28,7 +28,7 @@
             text-decoration: underline;
         }
         &__shorts {
-            width: 35%;
+            width: 30%;
             @include flex-col;
             input, select {
                 border: none;
@@ -54,22 +54,55 @@
             }
         }
     }
-    &__ingredients {
+    &__ingredients, &__instructions {
         width: 90%;
-        margin-top: 1rem;
+        margin-top: 0.2rem;
         border:solid 1px black;
         @include flex-row;
         justify-content: space-around;
+        position: relative;
         &__pickers {
             width: 40%;
             @include flex-col;
-            
+            position: sticky;
+            left: 0;
             &__item {
                 margin: 0.4rem;
                 @include flex-row;
                 justify-content: space-between;
                 .short {
                     width: 20%;
+                }
+            }
+        }
+        .subContainer {
+            border: solid 1px black;
+            width: 40%;
+            margin: 0.2rem 0;
+            height: 100%;
+            padding: 0.2rem;
+            max-height: 15vh;
+            overflow: auto;
+            p {
+                margin: 0;
+            }
+            .subContainerItem {
+                @include flex-row;
+                justify-content: space-between;
+                margin: 0.2rem;
+            }
+            ol {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                li { 
+                    width: 80%;
+                    position: relative;
+                    button {
+                        position: absolute;
+                        right:10;
+                        top: 0;
+                    }
                 }
             }
         }

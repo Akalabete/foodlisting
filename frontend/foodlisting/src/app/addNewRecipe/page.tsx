@@ -48,10 +48,16 @@ export default function AddNewRecipePage() {
         }
     };
     const addInstruction = () => {
-    if (newInstruction.trim() !== '') {
-        setInstructions([...instructions, newInstruction]);
-        setNewInstruction('');
-    }
+        if (newInstruction.trim() !== '') {
+            setInstructions([...instructions, newInstruction]);
+            setNewInstruction('');
+        }
+    };
+    const removeIngredient = (id: string) => {
+        setSelectedIngredients(selectedIngredients.filter(item => item.ingredient._id !== id));
+    };
+    const removeInstruction = (index: number) => {
+        setInstructions(instructions.filter((_, i) => i !== index));
     };
     return (
         <div className={styles.newRecipeContainer}>
@@ -99,7 +105,7 @@ export default function AddNewRecipePage() {
             </div>
             <h2>Ingrédients</h2>
             <div className={styles.newRecipeContainer__ingredients}>
-                <div className={styles.newRecipeContainer__ingredients__picker}>
+                <div className={styles.newRecipeContainer__ingredients__pickers}>
                     <div className={styles.newRecipeContainer__ingredients__pickers__item}>
                         <label htmlFor="ingredients">Ingrédients</label>
                         <select id="ingredients" name="ingredients">
@@ -122,17 +128,21 @@ export default function AddNewRecipePage() {
                     <button type="button" onClick={addIngredient}>Ajouter Ingrédient</button>   
                 </div>
                 <div id="ingredientsContainer">
-                    {selectedIngredients.map((selectedIngredient, index) => (
-                        <div key={index}>
+                    
+                </div>
+                <div id="ingredientsContainer" className={styles.subContainer}>
+                <button type="button" onClick={() => alert('Ouvrir la modale pour ajouter un nouvel ingrédient')}>Ajouter un nouvel ingrédient à la liste</button>
+                    {[...selectedIngredients].reverse().map((selectedIngredient) => (
+                        <div className={styles.subContainerItem} key={selectedIngredient.ingredient._id}>
                             <p>{selectedIngredient.ingredient.name}, {selectedIngredient.qty} {selectedIngredient.ingredient.unityType}</p>
+                            <button type="button" onClick={() => removeIngredient(selectedIngredient.ingredient._id)}>X</button>
                         </div>
                     ))}
-                    <button type="button" onClick={() => alert('Ouvrir la modale pour ajouter un nouvel ingrédient')}>Ajouter un nouvel ingrédient à la liste</button>
                 </div>
             </div>
-            <div>
-                <h2>Instructions</h2> 
-                <div>
+            <h2>Instructions</h2> 
+            <div className={styles.newRecipeContainer__instructions}>
+                <div className={styles.newRecipeContainer__instructions__pickers}>
                     <label htmlFor="instruction">Instruction</label>
                     <input
                         type="text"
@@ -143,12 +153,18 @@ export default function AddNewRecipePage() {
                     />
                     <button type="button" onClick={addInstruction}>Ajouter Instruction</button>
                 </div>
-                <div id="instructionsContainer">
-                    {instructions.map((instruction, index) => (
-                        <div key={index}>
-                            <p>{instruction}</p>
-                        </div>
-                    ))}
+                <div id="instructionsContainer" className={styles.subContainer}>
+                    <p>Dans l&apos;ordre : </p>
+                    <ol>
+                        {instructions.map((instruction, index) => (
+                            <li className={styles.subContainerItem} key={index}>
+                                <p>{instruction}</p>
+                                <span>
+                                    <button type="button" onClick={() => removeInstruction(index)}>X</button>
+                                </span>
+                            </li>
+                        ))}
+                    </ol>
                 </div>
             </div>
             <button>Ajouter la recette</button>
