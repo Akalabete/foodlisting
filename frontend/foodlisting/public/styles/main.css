@@ -316,7 +316,7 @@
   text-decoration: underline;
 }
 .newRecipeContainer__informations__shorts {
-  width: 35%;
+  width: 30%;
   display: flex;
   flex-direction: column;
 }
@@ -344,27 +344,62 @@
   border: none;
   background-color: blanchedalmond;
 }
-.newRecipeContainer__ingredients {
+.newRecipeContainer__ingredients, .newRecipeContainer__instructions {
   width: 90%;
-  margin-top: 1rem;
+  margin-top: 0.2rem;
   border: solid 1px black;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  position: relative;
 }
-.newRecipeContainer__ingredients__pickers {
+.newRecipeContainer__ingredients__pickers, .newRecipeContainer__instructions__pickers {
   width: 40%;
   display: flex;
   flex-direction: column;
+  position: sticky;
+  left: 0;
 }
-.newRecipeContainer__ingredients__pickers__item {
+.newRecipeContainer__ingredients__pickers__item, .newRecipeContainer__instructions__pickers__item {
   margin: 0.4rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.newRecipeContainer__ingredients__pickers__item .short {
+.newRecipeContainer__ingredients__pickers__item .short, .newRecipeContainer__instructions__pickers__item .short {
   width: 20%;
+}
+.newRecipeContainer__ingredients .subContainer, .newRecipeContainer__instructions .subContainer {
+  border: solid 1px black;
+  width: 40%;
+  margin: 0.2rem 0;
+  height: 100%;
+  padding: 0.2rem;
+  max-height: 15vh;
+  overflow: auto;
+}
+.newRecipeContainer__ingredients .subContainer p, .newRecipeContainer__instructions .subContainer p {
+  margin: 0;
+}
+.newRecipeContainer__ingredients .subContainer .subContainerItem, .newRecipeContainer__instructions .subContainer .subContainerItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0.2rem;
+}
+.newRecipeContainer__ingredients .subContainer ol, .newRecipeContainer__instructions .subContainer ol {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.newRecipeContainer__ingredients .subContainer ol li, .newRecipeContainer__instructions .subContainer ol li {
+  width: 80%;
+  position: relative;
+}
+.newRecipeContainer__ingredients .subContainer ol li button, .newRecipeContainer__instructions .subContainer ol li button {
+  position: absolute;
+  right: 10;
+  top: 0;
 }
 
 /*# sourceMappingURL=main.css.map */

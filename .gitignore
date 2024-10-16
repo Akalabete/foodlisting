@@ -4,3 +4,5 @@ node_modules/
 frontend/foodlisting/package-lock.json
 MVCSCRUDs/scruds.xlsx
 MVCSCRUDs/~$scruds.xlsx
+frontend/foodlisting/public/styles/main.css
+frontend/foodlisting/public/styles/main.css.map
