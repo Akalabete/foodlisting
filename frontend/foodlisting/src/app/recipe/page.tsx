@@ -2,6 +2,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { Recipe } from '../../models/recipe.d';
 import styles from './page.module.scss';
 
 
@@ -15,7 +16,7 @@ const formatTime = (minutes: number): string => {
 };
 
 const RecipePage: React.FC = () => {
-  const selectedRecipe = useSelector((state: RootState) => state.recipes.selectedRecipe);
+  const selectedRecipe = useSelector((state: RootState) => state.recipes.selectedRecipe) as Recipe;
   console.log(selectedRecipe);
   if (!selectedRecipe) {
     return <div>No recipe selected</div>;
@@ -46,6 +47,7 @@ const RecipePage: React.FC = () => {
           <p>Niveau de difficulté: {potIcons}</p>
         </div>
       </div>
+      <p>{selectedRecipe.recipeDescription}</p>
       <div className={styles.recipeWrapper__lists}>
         <div className={styles.recipeWrapper__lists__ingredients}>
           <h2>Liste des ingrédients:</h2>

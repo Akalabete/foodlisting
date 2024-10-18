@@ -1,5 +1,6 @@
+// recipesSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Recipe } from '../../models/recipe.d';
+import { Recipe } from '../../models/recipe';
 
 interface RecipesState {
   recipes: Recipe[];
@@ -18,6 +19,7 @@ const recipesSlice = createSlice({
   initialState,
   reducers: {
     setRecipes(state, action: PayloadAction<Recipe[]>) {
+      console.log('Setting recipes:', action.payload); // Vérifiez que les données sont mises à jour
       state.recipes = action.payload;
     },
     setSelectedRecipe(state, action: PayloadAction<Recipe | null>) {

@@ -8,7 +8,7 @@ export default function Menu() {
         <div className={styles.menuWrapper}>
             <h1>Bonjour</h1>
             <p>que faisons nous aujourd&apos;hui</p>
-            <Link href="#">
+            <Link href="/addNewRecipe">
                 <button>Ajouter une recette</button>
             </Link>
             <button>Prévoir des menus</button>

@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/recipes', async (req, res) => {
   try {
-    const { recipeName, isVegan, isVegetarian, numberOfSpoon, instructionPoints, difficultyRate, yummyRating, bakingTime, createdBy, ingredients } = req.body;
+    const { recipeName, recipeDescription, isVegan, isVegetarian, numberOfSpoon, instructionPoints, difficultyRate, yummyRating, bakingTime, createdBy, ingredients } = req.body;
 
     const ingredientPromises = ingredients.map(async ing => {
       const ingredient = await Ingredient.findOneAndUpdate(
@@ -24,6 +24,7 @@ router.post('/recipes', async (req, res) => {
 
     const newRecipe = new Recipe({
       recipeName,
+      recipeDescription,
       isVegan,
       isVegetarian,
       numberOfSpoon,
