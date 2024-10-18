@@ -2,6 +2,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { Recipe } from '../../models/recipe.d';
 import styles from './page.module.scss';
 
 
@@ -15,7 +16,7 @@ const formatTime = (minutes: number): string => {
 };
 
 const RecipePage: React.FC = () => {
-  const selectedRecipe = useSelector((state: RootState) => state.recipes.selectedRecipe);
+  const selectedRecipe = useSelector((state: RootState) => state.recipes.selectedRecipe) as Recipe;
   console.log(selectedRecipe);
   if (!selectedRecipe) {
     return <div>No recipe selected</div>;

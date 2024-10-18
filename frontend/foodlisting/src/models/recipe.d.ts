@@ -1,3 +1,4 @@
+import { Ingredient } from "./ingredient.d";
 export interface Recipe {
   _id: string;
   recipeName: string;
@@ -10,5 +11,5 @@ export interface Recipe {
   yummyRating: number;
   bakingTime: number;
   createdBy: string;
-  ingredients: { ingredient: string; qty: number }[];
+  ingredients: { ingredient: Ingredient; qty: number }[];
 }
