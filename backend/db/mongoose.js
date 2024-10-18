@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
-const MONGODB_URI = "mongodb+srv://lacouralexandre:Y5UOeMymaIP6Lw3U@akatest.3bqaqao.mongodb.net/foodlisting?retryWrites=true&w=majority"
-console.log('MONGODB_URI:', MONGODB_URI);
+require('dotenv').config({ path: '../.env.local' }); 
+const MONGODB_URI = process.env.MONGODB_URI;
 if (!MONGODB_URI) {
   console.error('MongoDB URI is not found!');
   process.exit(1);
