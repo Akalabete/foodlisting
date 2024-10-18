@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const connectDB = require('./db/mongoose');
+const cors = require('cors');
+const connectToDatabase = require('./db/mongoose');
 const findAllRecipes = require('./src/routes/findAllRecipes');
 const addNewRecipe = require('./src/routes/addNewRecipe');
 const findRecipeByPk = require('./src/routes/findRecipeByPk');
@@ -12,8 +13,8 @@ const getAllIngredients = require('./src/routes/getAllIngredients');
 const app = express();
 
 app.use(bodyParser.json());
-
-connectDB();
+app.use(cors());
+connectToDatabase();
 
 app.use('/', findAllRecipes);
 app.use('/', addNewRecipe);

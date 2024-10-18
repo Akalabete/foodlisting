@@ -6,3 +6,7 @@ MVCSCRUDs/scruds.xlsx
 MVCSCRUDs/~$scruds.xlsx
 frontend/foodlisting/public/styles/main.css
 frontend/foodlisting/public/styles/main.css.map
+backend/.env.local
+.gitignore
+.env.local
+package.json
