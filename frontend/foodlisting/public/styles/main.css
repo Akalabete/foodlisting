@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .mainWindow {
   display: flex;
   flex-direction: column;
@@ -181,21 +182,108 @@
   margin: 1vh auto;
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
 }
 .recipeWrapper__lists > * {
-  width: 50%;
+  width: 45%;
+  border: solid 2px black;
+  border-radius: 45px;
+  max-height: 50vh;
+  padding-bottom: 1vh;
+  scrollbar-width: none;
+}
+.recipeWrapper__lists > *::-webkit-scrollbar {
+  display: none;
 }
 .recipeWrapper__lists > * h2 {
   text-align: center;
   color: green;
   font-style: italic;
 }
+.recipeWrapper__lists > *.listContainer {
+  overflow-y: auto;
+  padding: 0 1vw;
+}
+.recipeWrapper__lists > *.listContainer::-webkit-scrollbar {
+  width: 8px; /* Largeur de la barre de défilement */
+}
+.recipeWrapper__lists > *.listContainer::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Couleur de la piste de défilement */
+  border-radius: 10px; /* Arrondir les coins de la piste */
+}
+.recipeWrapper__lists > *.listContainer::-webkit-scrollbar-thumb {
+  background: #888; /* Couleur de la poignée de défilement */
+  border-radius: 10px; /* Arrondir les coins de la poignée */
+}
+.recipeWrapper__lists > *.listContainer::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Couleur de la poignée de défilement au survol */
+}
+.recipeWrapper__lists > * h2 {
+  margin: 0.5vh auto;
+}
 .recipeWrapper__lists__ingredients ul {
+  margin-top: 0.5vh;
   list-style-type: circle;
-  padding-left: 20px;
+  padding-left: 30px;
+}
+.recipeWrapper__lists__ingredients ul li, .recipeWrapper__lists__ingredients ul p {
+  margin: 3px 0;
+  padding-left: 10px;
 }
 .recipeWrapper__lists__ingredients ul li {
-  margin: 5px 0;
+  text-decoration: underline dashed;
+  text-underline-offset: 4px;
+  color: teal;
+}
+.recipeWrapper__lists__ingredients .listContainer {
+  margin-right: 2vw;
+  height: 80%;
+  overflow-y: auto;
+  padding: 0 1vw;
+}
+.recipeWrapper__lists__ingredients .listContainer::-webkit-scrollbar {
+  width: 8px; /* Largeur de la barre de défilement */
+}
+.recipeWrapper__lists__ingredients .listContainer::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Couleur de la piste de défilement */
+  border-radius: 10px; /* Arrondir les coins de la piste */
+}
+.recipeWrapper__lists__ingredients .listContainer::-webkit-scrollbar-thumb {
+  background: #888; /* Couleur de la poignée de défilement */
+  border-radius: 10px; /* Arrondir les coins de la poignée */
+}
+.recipeWrapper__lists__ingredients .listContainer::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Couleur de la poignée de défilement au survol */
+}
+.recipeWrapper__lists__instructions ol {
+  list-style-type: decimal;
+}
+.recipeWrapper__lists__instructions ol li {
+  color: black;
+  margin: 1vh 0;
+}
+.recipeWrapper__lists__instructions ol li::marker {
+  color: teal;
+}
+.recipeWrapper__lists__instructions .listContainer {
+  margin-right: 2vw;
+  height: 80%;
+  overflow-y: auto;
+  padding: 0 1vw;
+}
+.recipeWrapper__lists__instructions .listContainer::-webkit-scrollbar {
+  width: 8px; /* Largeur de la barre de défilement */
+}
+.recipeWrapper__lists__instructions .listContainer::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Couleur de la piste de défilement */
+  border-radius: 10px; /* Arrondir les coins de la piste */
+}
+.recipeWrapper__lists__instructions .listContainer::-webkit-scrollbar-thumb {
+  background: #888; /* Couleur de la poignée de défilement */
+  border-radius: 10px; /* Arrondir les coins de la poignée */
+}
+.recipeWrapper__lists__instructions .listContainer::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Couleur de la poignée de défilement au survol */
 }
 
 /*# sourceMappingURL=main.css.map */
