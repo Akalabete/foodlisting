@@ -22,7 +22,7 @@ export default function AddNewRecipePage() {
     useEffect(() => {
         async function fetchIngredients() {
             try {
-                const res = await fetch('/api/ingredients');
+                const res = await fetch('http://localhost:3001/ingredients');
                 if (!res.ok) {
                     throw new Error('Failed to fetch ingredients');
                 }
@@ -59,6 +59,49 @@ export default function AddNewRecipePage() {
     const removeInstruction = (index: number) => {
         setInstructions(instructions.filter((_, i) => i !== index));
     };
+    const addNewRecipe = async () => {
+        const recipeName = (document.getElementById('name') as HTMLInputElement).value;
+        const bakingTime = Number((document.getElementById('preparationTime') as HTMLInputElement).value);
+        const numberOfSpoon = Number((document.getElementById('numberOfSpoon') as HTMLInputElement).value);
+        const difficulty = Number((document.getElementById('difficulty') as HTMLSelectElement).value);
+        const yummyRating = Number((document.getElementById('yummyRating') as HTMLSelectElement).value);
+        const recipeDescription = (document.getElementById('description') as HTMLTextAreaElement).value;
+        const ingredients = selectedIngredients.map(selectedIngredient => ({
+          ingredient: selectedIngredient.ingredient._id,
+          qty: selectedIngredient.qty
+        }));
+        const instructionPoints = instructions;
+        const newRecipe = {
+          recipeName,
+          bakingTime,
+          numberOfSpoon,
+          difficulty,
+          yummyRating,
+          recipeDescription,
+          ingredients,
+          instructionPoints
+        };
+      
+        try {
+            console.log('Adding new recipe:', newRecipe);
+          const response = await fetch('http://localhost:3001/recipes', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newRecipe)
+          });
+      
+          if (!response.ok) {
+            throw new Error('Failed to add new recipe');
+          }
+      
+          const result = await response.json();
+          console.log('Recipe added successfully:', result);
+        } catch (error) {
+          console.error('Error adding new recipe:', error);
+        }
+      };
     return (
         <div className={styles.newRecipeContainer}>
             <h1>Ajouter une nouvelle Recette</h1>
@@ -167,7 +210,7 @@ export default function AddNewRecipePage() {
                     </ol>
                 </div>
             </div>
-            <button>Ajouter la recette</button>
+            <button onClick={addNewRecipe}>Ajouter la recette</button>
         </div>
     );
 }
