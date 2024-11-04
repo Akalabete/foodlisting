@@ -45,6 +45,7 @@ export default function AddNewRecipePage() {
         const selectedIngredient = ingredients.find(ingredient => ingredient._id === selectedIngredientId);
         if (selectedIngredient && quantity > 0) {
             setSelectedIngredients([...selectedIngredients, { ingredient: selectedIngredient, qty: quantity }]);
+            console.log('Selected Ingredients:', selectedIngredient);
         }
     };
     const addInstruction = () => {
@@ -152,8 +153,8 @@ export default function AddNewRecipePage() {
                     <div className={styles.newRecipeContainer__ingredients__pickers__item}>
                         <label htmlFor="ingredients">Ingrédients</label>
                         <select id="ingredients" name="ingredients">
-                            {ingredients.map((ingredient, index) => (
-                                <option key={index} value={ingredient._id}>{ingredient.name}, {ingredient.ingType}, {ingredient.unityType}</option>
+                            {ingredients.map(ingredient => (
+                                <option key={ingredient._id} value={ingredient._id}>{ingredient.name}, {ingredient.ingType}, {ingredient.unityType}</option>
                             ))}
                         </select>
                     </div>
