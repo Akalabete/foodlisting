@@ -17,6 +17,7 @@ router.post('/recipes', async (req, res) => {
         { upsert: true, new: true }
       );
       return { ingredient: ingredient._id, qty: ing.qty };
+      console.log('Ingredient created/updated:', ingredient);
     });
 
     const ingredientRefs = await Promise.all(ingredientPromises);
@@ -37,7 +38,7 @@ router.post('/recipes', async (req, res) => {
     });
 
     await newRecipe.save();
-    const message = 'Merci pour votre contribution, la recette ${recipeName} a bien été ajoutée';
+    const message = `Merci pour votre contribution, la recette ${recipeName} a bien été ajoutée`;
     res.json({ message, data: newRecipe })
   } catch (err) {
     console.error('Error saving recipe:', err);
