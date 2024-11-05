@@ -6,6 +6,9 @@ import { setIngredients, setError } from '../../store/slices/ingredientsSlice';
 import { Ingredient } from '../../models/ingredient';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { openModal, closeModal } from '../../store/slices/modalSlice';
+import Modal from '../../components/Modal/Modal';
+import AddNewIngredient from '../../components/AddIngredient/Addingredient';
 interface SelectedIngredient {
     ingredient: Ingredient;
     qty: number;
@@ -103,8 +106,20 @@ export default function AddNewRecipePage() {
           console.error('Error adding new recipe:', error);
         }
       };
+      const openModalIngredient = () => {
+        dispatch(openModal(<AddNewIngredient />));
+      };
+      const modal = useSelector((state: RootState) => state.modal);
+        const handleCloseModal = () => {
+        dispatch(closeModal()); 
+    };
     return (
         <div className={styles.newRecipeContainer}>
+            {modal.isOpen && (
+                <Modal isOpen={modal.isOpen} onClose={handleCloseModal}>
+                {modal.children}
+                </Modal>
+            )}
             <h1>Ajouter une nouvelle Recette</h1>
             <h2>Informations générales</h2>
             <div className={styles.newRecipeContainer__informations}>
@@ -175,7 +190,7 @@ export default function AddNewRecipePage() {
                     
                 </div>
                 <div id="ingredientsContainer" className={styles.subContainer}>
-                <button type="button" onClick={() => alert('Ouvrir la modale pour ajouter un nouvel ingrédient')}>Ajouter un nouvel ingrédient à la liste</button>
+                <button type="button" onClick={openModalIngredient}>Ajouter un nouvel ingrédient à la liste</button>
                     {[...selectedIngredients].reverse().map((selectedIngredient) => (
                         <div className={styles.subContainerItem} key={selectedIngredient.ingredient._id}>
                             <p>{selectedIngredient.ingredient.name}, {selectedIngredient.qty} {selectedIngredient.ingredient.unityType}</p>

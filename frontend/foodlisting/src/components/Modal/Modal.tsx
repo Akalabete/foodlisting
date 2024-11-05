@@ -1,24 +1,18 @@
-import React from 'react';
-import { useState } from 'react';
+'use client'
+import { ModalProps } from '../../models/modal';
 import styles from './Modal.module.scss';
-import { ModalProps } from '../../models/modal.d';
 
+export default function Modal({isOpen, children,  onClose}:ModalProps){
 
-
-const Modal : React.FC<ModalProps> = ({show, children}) => {
-    const [modalOpen, setModalOpen] = useState(show);   
-    const handleModalClose = () => {
-        setModalOpen(false);
-    } 
-    const showHideClassName = modalOpen ? 'modal display-block' : 'modal display-none';
+    if (!isOpen) {
+        return null;
+    }
     return (
-        <div className={showHideClassName}>
-        <section className={styles.modalContainer}>
-            {children}
-            <button onClick={handleModalClose}>Close</button>
-        </section>
+        <div className={styles.modalOverlay}>
+            <div className={styles.modal}>
+                {children}
+                <button className={styles.button} onClick={onClose}>Ok !</button>
+            </div>
         </div>
-    );
-};
-
-export default Modal;
+    )
+}
