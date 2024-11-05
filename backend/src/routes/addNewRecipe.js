@@ -9,15 +9,14 @@ const router = express.Router();
 router.post('/recipes', async (req, res) => {
   try {
     const { recipeName, recipeDescription, isVegan, isVegetarian, numberOfSpoon, instructionPoints, difficultyRate, yummyRating, bakingTime, createdBy, ingredients } = req.body;
-
+    console.log('Received ingredients:', ingredients);
     const ingredientPromises = ingredients.map(async ing => {
-      const ingredient = await Ingredient.findOneAndUpdate(
-        { name: ing.name, unityType: ing.unityType },
-        { name: ing.name, unityType: ing.unityType, ingType: ing.ingType },
-        { upsert: true, new: true }
-      );
+      const ingredient = await Ingredient.findById(ing.ingredient);
+      if (!ingredient) {
+        throw new Error(`Ingredient with ID ${ing.ingredient} not found`);
+      }
+      console.log('Ingredient found:', ingredient);
       return { ingredient: ingredient._id, qty: ing.qty };
-      console.log('Ingredient created/updated:', ingredient);
     });
 
     const ingredientRefs = await Promise.all(ingredientPromises);
