@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { openModal, closeModal } from '../../store/slices/modalSlice';
 import Modal from '../../components/Modal/Modal';
-import AddNewIngredient from '../../components/AddIngredient/Addingredient';
+import AddIngredient from '../../components/AddIngredient/AddIngredient';
 interface SelectedIngredient {
     ingredient: Ingredient;
     qty: number;
@@ -107,7 +107,7 @@ export default function AddNewRecipePage() {
         }
       };
       const openModalIngredient = () => {
-        dispatch(openModal(<AddNewIngredient />));
+        dispatch(openModal('ADD_NEW_INGREDIENT'));
       };
       const modal = useSelector((state: RootState) => state.modal);
         const handleCloseModal = () => {
@@ -117,7 +117,7 @@ export default function AddNewRecipePage() {
         <div className={styles.newRecipeContainer}>
             {modal.isOpen && (
                 <Modal isOpen={modal.isOpen} onClose={handleCloseModal}>
-                {modal.children}
+                {modal.modalType === 'ADD_NEW_INGREDIENT' && <AddIngredient />}
                 </Modal>
             )}
             <h1>Ajouter une nouvelle Recette</h1>

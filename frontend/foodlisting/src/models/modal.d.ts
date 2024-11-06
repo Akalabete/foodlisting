@@ -1,6 +1,6 @@
 
 export interface ModalProps {
   isOpen: boolean;
-  children?: React.ReactNode;
+  children: React.ReactNode;
   onClose: () => void;
 }
