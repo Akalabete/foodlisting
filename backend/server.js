@@ -8,7 +8,7 @@ const findRecipeByPk = require('./src/routes/findRecipeByPk');
 const deleteRecipe = require('./src/routes/deleteRecipe');
 const updateRecipe = require('./src/routes/updateRecipe');
 const getAllIngredients = require('./src/routes/getAllIngredients');
-
+const addNewIngredient = require('./src/routes/addNewIngredient');
 
 const app = express();
 
@@ -22,6 +22,7 @@ app.use('/', findRecipeByPk);
 app.use('/', deleteRecipe);
 app.use('/', updateRecipe);
 app.use('/', getAllIngredients);
+app.use('/', addNewIngredient);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
