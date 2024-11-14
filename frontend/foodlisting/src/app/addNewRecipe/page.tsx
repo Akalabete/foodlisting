@@ -111,8 +111,10 @@ export default function AddNewRecipePage() {
       };
       const modal = useSelector((state: RootState) => state.modal);
         const handleCloseModal = () => {
-        dispatch(closeModal()); 
+        dispatch(closeModal());
+        window.location.reload();
     };
+        
     return (
         <div className={styles.newRecipeContainer}>
             {modal.isOpen && (

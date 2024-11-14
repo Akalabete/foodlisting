@@ -444,4 +444,35 @@
   margin: 0 10px;
 }
 
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-style: italic;
+  color: teal;
+}
+
+.addIngredientForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.addIngredientForm .formItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.addIngredientForm .formItem .formLabel {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: teal;
+}
+.addIngredientForm .formItem .formInput {
+  max-width: 50%;
+  padding: 0.5rem;
+  border: 1px solid grey;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
 /*# sourceMappingURL=main.css.map */
