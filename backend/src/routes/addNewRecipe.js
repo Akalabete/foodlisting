@@ -9,13 +9,13 @@ const router = express.Router();
 router.post('/recipes', async (req, res) => {
   try {
     const { recipeName, recipeDescription, isVegan, isVegetarian, numberOfSpoon, instructionPoints, difficultyRate, yummyRating, bakingTime, createdBy, ingredients } = req.body;
-
+    console.log('Received ingredients:', ingredients);
     const ingredientPromises = ingredients.map(async ing => {
-      const ingredient = await Ingredient.findOneAndUpdate(
-        { name: ing.name, unityType: ing.unityType },
-        { name: ing.name, unityType: ing.unityType, ingType: ing.ingType },
-        { upsert: true, new: true }
-      );
+      const ingredient = await Ingredient.findById(ing.ingredient);
+      if (!ingredient) {
+        throw new Error(`Ingredient with ID ${ing.ingredient} not found`);
+      }
+      console.log('Ingredient found:', ingredient);
       return { ingredient: ingredient._id, qty: ing.qty };
     });
 
@@ -37,7 +37,7 @@ router.post('/recipes', async (req, res) => {
     });
 
     await newRecipe.save();
-    const message = 'Merci pour votre contribution, la recette ${recipeName} a bien été ajoutée';
+    const message = `Merci pour votre contribution, la recette ${recipeName} a bien été ajoutée`;
     res.json({ message, data: newRecipe })
   } catch (err) {
     console.error('Error saving recipe:', err);
