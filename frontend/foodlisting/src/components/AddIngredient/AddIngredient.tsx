@@ -3,8 +3,15 @@ import styles from './AddIngredient.module.scss';
 
 const unityTypes = ['gramme(s)', 'unité(s)', 'petite cuillère', 'centilitre(s)', 'cuillère à soupe'];
 const ingType = ['légume', 'fruit', 'oeuf', 'ingrédient végan', 'viande/poisson/lait d/origine animale'];
+interface AddIngredientProps {
 
-export default function AddIngredient() {
+  onSuccess: () => Promise<void>;
+
+  // other props
+
+}
+
+export default function AddIngredient( { onSuccess }: AddIngredientProps) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -23,6 +30,7 @@ export default function AddIngredient() {
 
       if (response.ok) {
         alert('Ingrédient ajouté avec succès');
+        onSuccess();
       } else {
         const errorData = await response.json();
         alert(`Erreur: ${errorData.message}`);

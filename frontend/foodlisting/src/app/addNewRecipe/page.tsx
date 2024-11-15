@@ -1,6 +1,6 @@
 'use client';
-
-import  styles from './page.module.scss';
+import { useCallback } from 'react';
+import styles from './page.module.scss';
 import { RootState, AppDispatch } from '../../store/store';
 import { setIngredients, setError } from '../../store/slices/ingredientsSlice';
 import { Ingredient } from '../../models/ingredient';
@@ -9,117 +9,135 @@ import { useEffect, useState } from 'react';
 import { openModal, closeModal } from '../../store/slices/modalSlice';
 import Modal from '../../components/Modal/Modal';
 import AddIngredient from '../../components/AddIngredient/AddIngredient';
+
 interface SelectedIngredient {
-    ingredient: Ingredient;
-    qty: number;
-  }
-  
+  ingredient: Ingredient;
+  qty: number;
+}
+
 export default function AddNewRecipePage() {
-    const dispatch = useDispatch<AppDispatch>();
-    const ingredients = useSelector((state: RootState) => state.ingredients.ingredients);
-    const [selectedIngredients, setSelectedIngredients] = useState<SelectedIngredient[]>([]);
-    const [quantity, setQuantity] = useState<number>(0);
-    const [instructions, setInstructions] = useState<string[]>([]);
-    const [newInstruction, setNewInstruction] = useState<string>('');
-  
-    useEffect(() => {
-        async function fetchIngredients() {
-            try {
-                const res = await fetch('http://localhost:3001/ingredients');
-                if (!res.ok) {
-                    throw new Error('Failed to fetch ingredients');
-                }
-                const data: Ingredient[] = await res.json();
-                dispatch(setIngredients(data));
-            } catch (err) {
-                if (err instanceof Error) {
-                    dispatch(setError(err.message));
-                } else {
-                    dispatch(setError('An unknown error occurred'));
-                }
-            }
-        }
+  const dispatch = useDispatch<AppDispatch>();
+  const ingredients = useSelector((state: RootState) => state.ingredients.ingredients);
+  const modal = useSelector((state: RootState) => state.modal);
+  const [selectedIngredients, setSelectedIngredients] = useState<SelectedIngredient[]>([]);
+  const [quantity, setQuantity] = useState<number>(0);
+  const [instructions, setInstructions] = useState<string[]>([]);
+  const [newInstruction, setNewInstruction] = useState<string>('');
 
-        fetchIngredients();
-    }, [dispatch]);
+  // reset selected ingredients when the page is loaded
+  localStorage.removeItem('selectedIngredients');
+  const fetchIngredients = useCallback(async () => {
+    try {
+      const res = await fetch('http://localhost:3001/ingredients');
+      if (!res.ok) {
+        throw new Error('Failed to fetch ingredients');
+      }
+      const data: Ingredient[] = await res.json();
+      dispatch(setIngredients(data));
+    } catch (err) {
+      if (err instanceof Error) {
+        dispatch(setError(err.message));
+      } else {
+        dispatch(setError('An unknown error occurred'));
+      }
+    }
+  }, [dispatch]);
+  // fetch ingredients when the page is loaded  
+  useEffect(() => {
+    fetchIngredients();
+  }, [fetchIngredients]);
+  // load selected ingredients from local storage when the page is loaded
+  useEffect(() => {
+    const savedSelectedIngredients = localStorage.getItem('selectedIngredients');
+    if (savedSelectedIngredients) {
+      setSelectedIngredients(JSON.parse(savedSelectedIngredients));
+    }
+  }, []);
+  // save selected ingredients to local storage when the selected ingredients change
+  const addIngredient = () => {
+    const selectedIngredientId = (document.getElementById('ingredients') as HTMLSelectElement).value;
+    const selectedIngredient = ingredients.find(ingredient => ingredient._id === selectedIngredientId);
+    if (selectedIngredient && quantity > 0) {
+      const newSelectedIngredients = [...selectedIngredients, { ingredient: selectedIngredient, qty: quantity }];
+      setSelectedIngredients(newSelectedIngredients);
+      localStorage.setItem('selectedIngredients', JSON.stringify(newSelectedIngredients));
+    }
+  };
+  // add instruction to the list of instructions
+  const addInstruction = () => {
+    if (newInstruction.trim() !== '') {
+      setInstructions([...instructions, newInstruction]);
+      setNewInstruction('');
+    }
+  };
+  // remove ingredient from the list of selected ingredients
+  const removeIngredient = (id: string) => {
+    const newSelectedIngredients = selectedIngredients.filter(item => item.ingredient._id !== id);
+    setSelectedIngredients(newSelectedIngredients);
+    localStorage.setItem('selectedIngredients', JSON.stringify(newSelectedIngredients));
+  };
 
-    const addIngredient = () => {
-        const selectedIngredientId = (document.getElementById('ingredients') as HTMLSelectElement).value;
-        const selectedIngredient = ingredients.find(ingredient => ingredient._id === selectedIngredientId);
-        if (selectedIngredient && quantity > 0) {
-            setSelectedIngredients([...selectedIngredients, { ingredient: selectedIngredient, qty: quantity }]);
-            console.log('Selected Ingredients:', selectedIngredient);
-        }
-    };
-    const addInstruction = () => {
-        if (newInstruction.trim() !== '') {
-            setInstructions([...instructions, newInstruction]);
-            setNewInstruction('');
-        }
-    };
-    const removeIngredient = (id: string) => {
-        setSelectedIngredients(selectedIngredients.filter(item => item.ingredient._id !== id));
-    };
     const removeInstruction = (index: number) => {
-        setInstructions(instructions.filter((_, i) => i !== index));
+      setInstructions(instructions.filter((_, i) => i !== index));
     };
-    const addNewRecipe = async () => {
-        const recipeName = (document.getElementById('name') as HTMLInputElement).value;
-        const bakingTime = Number((document.getElementById('preparationTime') as HTMLInputElement).value);
-        const numberOfSpoon = Number((document.getElementById('numberOfSpoon') as HTMLInputElement).value);
-        const difficulty = Number((document.getElementById('difficulty') as HTMLSelectElement).value);
-        const yummyRating = Number((document.getElementById('yummyRating') as HTMLSelectElement).value);
-        const recipeDescription = (document.getElementById('description') as HTMLTextAreaElement).value;
-        const ingredients = selectedIngredients.map(selectedIngredient => ({
-          ingredient: selectedIngredient.ingredient._id,
-          qty: selectedIngredient.qty
-        }));
-        const instructionPoints = instructions;
-        const newRecipe = {
-          recipeName,
-          bakingTime,
-          numberOfSpoon,
-          difficulty,
-          yummyRating,
-          recipeDescription,
-          ingredients,
-          instructionPoints
-        };
-      
-        try {
-            console.log('Adding new recipe:', newRecipe);
-          const response = await fetch('http://localhost:3001/recipes', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newRecipe)
-          });
-      
-          if (!response.ok) {
-            throw new Error('Failed to add new recipe');
-          }
-      
-          const result = await response.json();
-          console.log('Recipe added successfully:', result);
-        } catch (error) {
-          console.error('Error adding new recipe:', error);
-        }
-      };
-      const openModalIngredient = () => {
-        dispatch(openModal('ADD_NEW_INGREDIENT'));
-      };
-      const modal = useSelector((state: RootState) => state.modal);
-        const handleCloseModal = () => {
-        dispatch(closeModal());
-        window.location.reload();
+  // add new recipe
+  const addNewRecipe = async () => {
+    const recipeName = (document.getElementById('name') as HTMLInputElement).value;
+    const bakingTime = Number((document.getElementById('preparationTime') as HTMLInputElement).value);
+    const numberOfSpoon = Number((document.getElementById('numberOfSpoon') as HTMLInputElement).value);
+    const difficultyRate = Number((document.getElementById('difficulty') as HTMLSelectElement).value);
+    const yummyRating = Number((document.getElementById('yummyRating') as HTMLSelectElement).value);
+    const recipeDescription = (document.getElementById('description') as HTMLTextAreaElement).value;
+    const ingredients = selectedIngredients.map(selectedIngredient => ({
+      ingredient: selectedIngredient.ingredient._id,
+      qty: selectedIngredient.qty
+    }));
+    const instructionPoints = instructions;
+    const newRecipe = {
+      recipeName,
+      recipeDescription,
+      bakingTime,
+      numberOfSpoon,
+      difficultyRate,
+      yummyRating,
+      ingredients,
+      instructionPoints
     };
+    try {
+      console.log('Adding new recipe:', newRecipe);
+      const response = await fetch('http://localhost:3001/recipes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newRecipe)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add new recipe');
+      }
+      const result = await response.json();
+      console.log('Recipe added successfully:', result);
+      alert('Recipe added successfully');
+      window.location.reload();
+    } catch (error) {
+      console.error('Error adding new recipe:', error);
+    }
+  };
+  // open modal to add new ingredient
+  const openModalIngredient = () => {
+    dispatch(openModal('ADD_NEW_INGREDIENT'));
+  };
+  // close modal
+  const handleCloseModal = () => {
+    dispatch(closeModal());
+  };
         
     return (
         <div className={styles.newRecipeContainer}>
             {modal.isOpen && (
                 <Modal isOpen={modal.isOpen} onClose={handleCloseModal}>
-                {modal.modalType === 'ADD_NEW_INGREDIENT' && <AddIngredient />}
+                {modal.modalType === 'ADD_NEW_INGREDIENT' && <AddIngredient onSuccess={fetchIngredients}/>}
                 </Modal>
             )}
             <h1>Ajouter une nouvelle Recette</h1>
@@ -232,3 +250,4 @@ export default function AddNewRecipePage() {
         </div>
     );
 }
+
