@@ -24,8 +24,6 @@ export default function AddNewRecipePage() {
   const [instructions, setInstructions] = useState<string[]>([]);
   const [newInstruction, setNewInstruction] = useState<string>('');
 
-  // reset selected ingredients when the page is loaded
-  localStorage.removeItem('selectedIngredients');
   const fetchIngredients = useCallback(async () => {
     try {
       const res = await fetch('http://localhost:3001/ingredients');
